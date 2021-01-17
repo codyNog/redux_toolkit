@@ -1,0 +1,49 @@
+anchors:
+  node_version: &node_version 14.15.1
+  node_image: &node_image cimg/node:14.15.1
+  node_install: &node_install
+    - node/install:
+        install-npm: false
+        install-yarn: true
+        node-version: *node_version
+  node_install_packages: &node_install_packages
+    - node/install-packages:
+        cache-path: ~/project/node_modules
+        override-ci-command: yarn install
+  restore_cache: &restore_cache
+    - restore_cache:
+        name: Restore Yarn Package Cache
+        keys:
+          - yarn-packages-{{ checksum "yarn.lock" }}
+  save_cache: &save_cache
+    - save_cache:
+        name: Save Yarn Package Cache
+        key: yarn-packages-{{ checksum "yarn.lock" }}
+        paths:
+          - ~/.cache/yarn
+
+jobs:
+  install:
+    docker:
+      - image: *node_image
+    steps:
+      - checkout
+      - <<: *node_install
+      - <<: *restore_cache
+      - <<: *node_install_packages
+      - <<: *save_cache
+
+orbs:
+  node: circleci/node@4.1.0
+version: 2.1
+workflows:
+  test_my_app:
+    jobs:
+      - install
+          filters:
+            tags:
+              only:
+                - qa
+            branches:
+              only:
+                - master
