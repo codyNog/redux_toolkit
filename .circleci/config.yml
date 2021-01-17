@@ -32,6 +32,16 @@ jobs:
       - <<: *restore_cache
       - <<: *node_install_packages
       - <<: *save_cache
+  build:
+    docker:
+      - image: *node_image
+    steps:
+      - checkout
+      - <<: *node_install
+      - <<: *restore_cache
+      - <<: *node_install_packages
+      - <<: *save_cache
+      - run: yarn build
 
 orbs:
   node: circleci/node@4.1.0
@@ -39,7 +49,7 @@ version: 2.1
 workflows:
   test_my_app:
     jobs:
-      - install:
+      - build:
           filters:
             tags:
               only:
