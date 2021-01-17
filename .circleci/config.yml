@@ -39,7 +39,7 @@ version: 2.1
 workflows:
   test_my_app:
     jobs:
-      - install
+      - install:
           filters:
             tags:
               only:
