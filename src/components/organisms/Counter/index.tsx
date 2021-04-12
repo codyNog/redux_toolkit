@@ -1,25 +1,20 @@
-import { counterSlice } from "~/store/features/counter/slice";
-import { useAppDispatch, useAppSelector } from "~/store/hooks/counter";
+import { useCounter } from "~/store/hooks/organisms/Counter";
 
 export const Counter: React.FC = () => {
-  const count = useAppSelector((state) => state.counter.value);
-  const dispatch = useAppDispatch();
-  const { increment, decrement } = counterSlice.actions;
+  const {
+    count,
+    onClickDecrementButton,
+    onClickIncrementButton
+  } = useCounter();
 
   return (
     <div>
       <div>
-        <button
-          aria-label="Increment value"
-          onClick={() => dispatch(increment())}
-        >
+        <button aria-label="Increment value" onClick={onClickIncrementButton}>
           Increment
         </button>
         <span>{count}</span>
-        <button
-          aria-label="Decrement value"
-          onClick={() => dispatch(decrement())}
-        >
+        <button aria-label="Decrement value" onClick={onClickDecrementButton}>
           Decrement
         </button>
       </div>
