@@ -1,6 +1,8 @@
 import App from "next/app";
 import Head from "next/head";
 import "ress";
+import { Provider } from "react-redux";
+import { store } from "~/store";
 
 export default class MyApp extends App {
   static async getInitialProps({ Component, ctx }) {
@@ -21,7 +23,9 @@ export default class MyApp extends App {
         <Head>
           <title>Next App</title>
         </Head>
-        <Component {...pageProps} />
+        <Provider store={store}>
+          <Component {...pageProps} />
+        </Provider>
       </>
     );
   }

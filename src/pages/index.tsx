@@ -1,8 +1,8 @@
 import { NextPage } from "next";
-import { Root } from "~/components/templates/root";
+import { Counter } from "~/components/organisms/Counter";
 
 const Component: NextPage = () => {
-  return <Root />;
+  return <Counter />;
 };
 
 export default Component;
