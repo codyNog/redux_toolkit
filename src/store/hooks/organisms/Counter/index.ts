@@ -1,6 +1,6 @@
 import { useCallback } from "react";
-import { counterSlice } from "~/store/features/counter/slice";
-import { useAppDispatch, useAppSelector } from "~/store/hooks/counter";
+import { useAppDispatch, useAppSelector } from "~/store";
+import { counterSlice } from "~/store/slices/counter";
 
 export const useCounter = () => {
   const count = useAppSelector((state) => state.counter.value);

@@ -21,5 +21,3 @@ export const counterSlice = createSlice({
     }
   }
 });
-
-export const selectCount = (state) => state.counter.useDebugValue;
