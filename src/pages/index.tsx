@@ -1,8 +1,8 @@
 import { NextPage } from "next";
-import { Counter } from "~/components/organisms/Counter";
+import { UserItem } from "~/components/organisms/UserItem";
 
 const Component: NextPage = () => {
-  return <Counter />;
+  return <UserItem />;
 };
 
 export default Component;
