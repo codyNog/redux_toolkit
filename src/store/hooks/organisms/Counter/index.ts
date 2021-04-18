@@ -1,19 +1,15 @@
-import { useCallback } from "react";
-import { useAppDispatch, useAppSelector } from "~/store";
-import { counterSlice } from "~/store/slices/counter";
+import { useCount } from "~/store/slices/count/hooks";
 
 export const useCounter = () => {
-  const count = useAppSelector((state) => state.counter.value);
-  const dispatch = useAppDispatch();
-  const { increment, decrement } = counterSlice.actions;
+  const { count, increment, decrement } = useCount();
 
-  const onClickIncrementButton = useCallback(() => {
-    dispatch(increment());
-  }, []);
+  const onClickIncrementButton = () => {
+    increment();
+  };
 
-  const onClickDecrementButton = useCallback(() => {
-    dispatch(decrement());
-  }, []);
+  const onClickDecrementButton = () => {
+    decrement();
+  };
 
   return { count, onClickIncrementButton, onClickDecrementButton };
 };

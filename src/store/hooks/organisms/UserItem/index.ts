@@ -1,13 +1,11 @@
 import { useEffect } from "react";
-import { useAppDispatch, useAppSelector } from "~/store";
-import { fetchUser } from "~/store/slices/user";
+import { useUser } from "~/store/slices/user/hooks";
 
 export const useUserItem = () => {
-  const user = useAppSelector((state) => state.user.user);
-  const dispatch = useAppDispatch();
+  const { user, fetchUser } = useUser();
 
   useEffect(() => {
-    dispatch(fetchUser("foo"));
+    fetchUser("foo");
   }, []);
 
   return { user };
