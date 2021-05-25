@@ -21,6 +21,7 @@ module.exports = {
     "~(.*)$": "<rootDir>/src/$1",
     "\\.(css|less)$": "identity-obj-proxy"
   },
+  testPathIgnorePatterns: ["/__tests__/mocks"],
 
   modulePaths: ["<rootDir>"],
   globals: {

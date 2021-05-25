@@ -34,4 +34,14 @@ describe("count", () => {
 
     expect(result.current.count).toBe(0);
   });
+
+  test("指定した値にsetする", () => {
+    const { result } = renderHook(() => useCount(), { wrapper });
+
+    act(() => {
+      result.current.setCount(100);
+    });
+
+    expect(result.current.count).toBe(100);
+  });
 });

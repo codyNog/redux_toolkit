@@ -1,12 +1,9 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { User } from "~/domain/entities/User";
+import { backend } from "~/domain/backend";
 
-const fetchUser = createAsyncThunk(
-  "fetchUser",
-  async (id: string): Promise<User> => {
-    return { id, name: "bar", age: 20 };
-  }
-);
+const fetchUser = createAsyncThunk("fetchUser", async (id: string) => {
+  return backend().user.getUser(id);
+});
 
 export const userAsyncReducers = {
   fetchUser
