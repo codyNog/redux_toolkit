@@ -12,8 +12,4 @@ const user: userUseCase = {
   getUser: async (_) => mockUser
 };
 
-const mockBackend: Backend = { user };
-
-export const spyBackend = () => {
-  jest.spyOn(backendModule, "backend").mockReturnValue(mockBackend);
-};
+export const mockBackend: Backend = { user };

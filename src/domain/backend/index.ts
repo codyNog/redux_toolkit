@@ -1,8 +1,9 @@
+import { mockBackend } from "__tests__/mocks/backend";
 import { userImpl } from "../repository/User";
 
-export const backend = () => {
-  return { user: userImpl };
-};
+const data = { user: userImpl };
 
-const backendType = backend();
-export type Backend = typeof backendType;
+export type Backend = typeof data;
+
+export const backend: Backend =
+  process.env.NODE_ENV === "test" ? mockBackend : { user: userImpl };

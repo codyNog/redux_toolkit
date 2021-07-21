@@ -33,4 +33,14 @@ describe("useCounter", () => {
 
     expect(result.current.count).toBe(0);
   });
+
+  test("任意の値を設定できる", () => {
+    const { result } = renderHook(() => useCounter(), { wrapper });
+
+    act(() => {
+      result.current.setCount(10);
+    });
+
+    expect(result.current.count).toBe(10);
+  });
 });

@@ -1,3 +1,4 @@
+import { useCallback } from "react";
 import { useAppDispatch, useAppSelector } from "~/store";
 import { countSlice } from "~/store/slices/count";
 
@@ -10,9 +11,11 @@ export const useCount = () => {
     setCount: set
   } = countSlice.actions;
 
-  const increment = () => dispatch(incr());
-  const decrement = () => dispatch(decr());
-  const setCount = (value: number) => dispatch(set(value));
+  const increment = useCallback(() => dispatch(incr()), [dispatch]);
+  const decrement = useCallback(() => dispatch(decr()), [dispatch]);
+  const setCount = useCallback((value: number) => dispatch(set(value)), [
+    dispatch
+  ]);
 
   return { count, increment, decrement, setCount };
 };

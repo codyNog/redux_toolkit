@@ -3,17 +3,12 @@ import { Provider } from "react-redux";
 import { store } from "~/store";
 import { renderHook } from "@testing-library/react-hooks";
 import { useUserItem } from "~/store/hooks/organisms/UserItem";
-import { spyBackend } from "__tests__/mocks/backend";
 
 const wrapper: React.ComponentType = ({ children }) => {
   return <Provider store={store}>{children}</Provider>;
 };
 
 describe("useUserItem", () => {
-  beforeEach(() => {
-    spyBackend();
-  });
-
   test("初期状態", async () => {
     const { result, waitForNextUpdate } = renderHook(() => useUserItem(), {
       wrapper

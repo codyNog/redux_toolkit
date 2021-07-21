@@ -5,16 +5,12 @@ import { renderHook } from "@testing-library/react-hooks";
 import { useUser } from "~/store/slices/user/hooks";
 import { userInitialState } from "~/store/slices/user/types";
 import { act } from "react-test-renderer";
-import { spyBackend } from "__tests__/mocks/backend";
 
 const wrapper: React.ComponentType = ({ children }) => {
   return <Provider store={store}>{children}</Provider>;
 };
 
 describe("useUser", () => {
-  beforeEach(() => {
-    spyBackend();
-  });
   test("初期状態", () => {
     const { result } = renderHook(() => useUser(), {
       wrapper
