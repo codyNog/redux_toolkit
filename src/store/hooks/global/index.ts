@@ -1,32 +1,10 @@
-import {
-  useState,
-  useCallback,
-  useContext,
-  createContext,
-  useEffect
-} from "react";
-import { backend } from "~/domain/backend";
-import { Asset } from "~/domain/entities/Asset";
-
-interface Context {
-  assets: Asset[];
-}
-
-export const AssetContext = createContext<Context>({
-  assets: []
-});
+import { useUser } from "~/store/hooks/global/User";
+import { createContainer } from "unstated-next";
 
 export const useGlobal = () => {
-  const [assets, setAssets] = useState([]);
+  const userStore = useUser();
 
-  const getAssets = useCallback(async () => {
-    const assets = await backend.asset.getAssets();
-    setAssets(assets);
-  }, [setAssets]);
-
-  useEffect(() => {
-    getAssets();
-  }, [getAssets]);
-
-  return { assets, setAssets };
+  return { userStore };
 };
+
+export const GlobalStore = createContainer(useGlobal);

@@ -3,7 +3,7 @@ import { useAppDispatch, useAppSelector } from "~/store";
 import { userAsyncReducers } from "../reducers";
 
 export const useUser = () => {
-  const user = useAppSelector((state) => state.user.user);
+  const { user, users } = useAppSelector((state) => state.user);
   const dispatch = useAppDispatch();
 
   const fetchUser = useCallback(
@@ -11,5 +11,9 @@ export const useUser = () => {
     [dispatch]
   );
 
-  return { user, fetchUser };
+  const fetchUsers = useCallback(() => {
+    dispatch(userAsyncReducers.fetchUsers());
+  }, [dispatch]);
+
+  return { user, fetchUser, users, fetchUsers };
 };
